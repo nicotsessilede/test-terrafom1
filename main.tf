@@ -1,33 +1,33 @@
-resource "azurerm_resource_group" "myResourceGroup" {
-  name     = "myResourceGroup"
+resource "azurerm_resource_group" "myResourceGroup1" {
+  name     = "myResourceGroup1"
   location = "East US"
 }
 
 resource "azurerm_virtual_network" "myVNet" {
   name                = "myVNet"
-  resource_group_name = azurerm_resource_group.myResourceGroup.name
-  location            = azurerm_resource_group.myResourceGroup.location
+  resource_group_name = azurerm_resource_group.myResourceGroup1.name
+  location            = azurerm_resource_group.myResourceGroup1.location
   address_space       = ["10.0.0.0/16"]
 }
 
 resource "azurerm_subnet" "frontend" {
   name                 = "frontend"
-  resource_group_name  = azurerm_resource_group.myResourceGroup.name
+  resource_group_name  = azurerm_resource_group.myResourceGroup1.name
   virtual_network_name = azurerm_virtual_network.myVNet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_subnet" "backend" {
   name                 = "backend"
-  resource_group_name  = azurerm_resource_group.myResourceGroup.name
+  resource_group_name  = azurerm_resource_group.myResourceGroup1.name
   virtual_network_name = azurerm_virtual_network.myVNet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_public_ip" "myAGPublicIPAddress" {
   name                = "myAGPublicIPAddress"
-  resource_group_name = azurerm_resource_group.myResourceGroup.name
-  location            = azurerm_resource_group.myResourceGroup.location
+  resource_group_name = azurerm_resource_group.myResourceGroup1.name
+  location            = azurerm_resource_group.myResourceGroup1.location
   allocation_method   = "Dynamic"
 }
 
@@ -44,8 +44,8 @@ locals {
 
 resource "azurerm_application_gateway" "network" {
   name                = "example-appgateway"
-  resource_group_name = azurerm_resource_group.myResourceGroup.name
-  location            = azurerm_resource_group.myResourceGroup.location
+  resource_group_name = azurerm_resource_group.myResourceGroup1.name
+  location            = azurerm_resource_group.myResourceGroup1.location
 
   sku {
     name     = "Standard_Small"
