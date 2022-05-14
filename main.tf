@@ -19,7 +19,7 @@ resource "azurerm_subnet" "frontend" {
 
 resource "azurerm_subnet" "backend" {
   name                 = "backend"
-  resource_group_name  = azurerm_resource_group.myRmyResourceGroup.name
+  resource_group_name  = azurerm_resource_group.myResourceGroup.name
   virtual_network_name = azurerm_virtual_network.myVNet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
