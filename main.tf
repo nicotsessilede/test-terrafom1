@@ -7,14 +7,14 @@ resource "azurerm_virtual_network" "myVNet" {
   name                = "myVNet"
   resource_group_name = azurerm_resource_group.myResourceGroup1.name
   location            = azurerm_resource_group.myResourceGroup1.location
-  address_space       = ["10.0.0.0/16"]
+  address_space       = ["10.21.0.0/16"]
 }
 
 resource "azurerm_subnet" "frontend" {
   name                 = "frontend"
   resource_group_name  = azurerm_resource_group.myResourceGroup1.name
   virtual_network_name = azurerm_virtual_network.myVNet.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = ["10.21.0.0/24"]
 }
 
 resource "azurerm_subnet" "backend" {
